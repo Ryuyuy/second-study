@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<template>
+    <div class="box">
+      <div v-swiper:mySwiper="swiperOption" class="swiperWrap">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <home title="梅园" background-image-file-name="itemAndBackground/BgMeiYuanFront.JPG"></home>
+          </div>
+          <div class="swiper-slide">
+            <detail
+              card-title="梅园"
+              card-content="在梅园的中心有着梅园的标志性的梅园小花园，其中一块石头上刻着大大的”梅“字，梅园多梅花，周围还有一圈的石凳，不少梅园的同学都会早上来这里早读，冬天的中午在这里晒太阳也是很多同学的选择，而且梅园也是距武汉大学图书馆总馆最近的地方，对于喜欢图书馆的同学，能住在梅园绝对是一种幸福。
+  每年冬季当其它花儿已经不在灿烂的时候，唯有梅花开放在冬季，愈是寒冷，愈是风欺雪压，花开得愈精神，愈秀气
+  梅花是中华民族的精神象征，具有强大而普遍的感染力和推动力。梅花坚韧不拔，不屈不挠，奋勇当先，自强不息的精神品质潜移默化的影响着住在梅园的同学。"
+              :card-images-file-name="['itemAndBackground/BgMeiYuan3.JPG']"
+              card-swiper-change-time="2000"
+              background-image-file-name="itemAndBackground/BgMeiYuan2.jpg"></detail>
+          </div>
+          <div class="swiper-slide">
+            <slide :items-in="items" background-image-file-name="itemAndBackground/BgMeiYuan.JPG">
+              <!--            <template slot="items">-->
+              <!--              <item :from-x="30"-->
+              <!--                    :from-y="4.5"-->
+              <!--                    :to-x="8"-->
+              <!--                    :to-y="10"-->
+              <!--                    :width="38"-->
+              <!--                    :height="49"-->
+              <!--                    item-id="administration"-->
+              <!--                    image-file-name="WHUAdministrationBuilding.png"-->
+              <!--                    :ani-time="0.3"-->
+              <!--                    card-title="行政楼"-->
+              <!--                    :card-content="administrationIntroduction"-->
+              <!--                    :tags="['武汉大学', '珞珈山职业学院']"-->
+              <!--                    card-image-file-name="WHUDefault.jpg"-->
+              <!--                    :end-scale="1.0"-->
+              <!--                    :items="items"-->
+              <!--              >-->
+              <!--              </item>-->
+              <!--            </template>-->
+            </slide>
+          </div>
+          <div class="swiper-slide">
+            <comment ref="comment" articleId="95" background-image-file-name="itemAndBackground/BgMeiYuanComment.JPG"></comment>
+          </div>
+        </div>
+        <!--      <div class="swiper-pagination swiper-pagination-bullets"></div>-->
+        <!--      <div class="swiper-pagination"></div>-->
+  
+        <!--      <div class="swiper-button-prev"></div>-->
+        <!--      <div class="swiper-button-next"></div>-->
+  
+        <div class="introduction-swiper-scrollbar swiper-scrollbar"></div>
+      </div>
+  
+    </div>
+  </template>
+  
+  <script>
+  // import 'swiper/swiper-bundle.css';
+  import slide from '../components/IntroductionSlide'
+  import home from '../components/IntroductionHome'
+  import item from '../components/IntroductionItem'
+  import detail from '../components/IntroductionDetail'
+  import comment from '../components/IntroductionComment'
+  let _this;
+  export default {
+    name: 'mei-yuan',
+    components: {
+      slide,
+      home,
+      item,
+      detail,
+      comment,
+    },
+    data: function(){
+      return {
+        items: [
+          {
+            fromX: 0,
+            fromY: 7,
+            toX: 8,
+            toY: 6,
+            itemId: 'meiYuan',
+            imageFileName: 'itemAndBackground/ItemMeiYuan.png',
+            aniTime: 0.3,
+            cardTitle: '梅园CBD',
+            cardContent: '梅园食堂是武大最受欢迎的食堂（之一）。每到饭点，梅园食堂就会“人满为患”，为了让同学们有位置就餐，食堂内部各处还贴着“请不要用各类物品占座”的标语，这也从侧面体现出梅园食堂的火爆~',
+            cardImageFileName: 'itemAndBackground/BgMeiYuanFront.JPG',
+            width: 47,
+            height: 80,
+            tags: ['肯德基', '呷哺呷哺'],
+            endScale: 0.7,
+            item: {
+              /**
+               * 是否显示详情
+               */
+              isShow: false,
+              /**
+               * 是否展示阴影
+               */
+              isShowShadow: false,
+              /**
+               * 用于优化的计时器
+               */
+              clearInterval: null
+            }
+          },
+          // {
+          //   fromX: 0,
+          //   fromY: 0,
+          //   toX: 8,
+          //   toY: 10,
+          //   itemId: 'administration2',
+          //   imageFileName: 'WHUAdministrationBuilding.png',
+          //   aniTime: 0.3,
+          //   cardTitle: '行政楼',
+          //   cardContent: 'this.administrationIntroduction',
+          //   cardImageFileName: 'WHUDefault.jpg',
+          //   width: 38,
+          //   height: 49,
+          //   tags: ['武汉大学', '珞珈山职业学院'],
+          //   endScale: 1.0,
+          //   item: {
+          //     /**
+          //      * 是否显示详情
+          //      */
+          //     isShow: false,
+          //
+          //     /**
+          //      * 是否展示阴影
+          //      */
+          //     isShowShadow: false,
+          //
+          //
+          //     /**
+          //      * 用于优化的计时器
+          //      */
+          //     clearInterval: null
+          //   }
+          // }
+        ],
+        administrationIntroduction: '武汉大学（Wuhan University）简称“武大”，是中华人民共和国教育部直属的综合性全国重点大学；位列“世界一流大学和一流学科”、“985工程”、“211工程”；入选学位授权自主审核单位、“珠峰计划”、“强基计划”、“2011计划”、“111计划”、卓越工程师教育培养计划、卓越法律人才教育培养计划、卓越医生教育培养计划、国家建设高水平大学公派研究生项目、国家级新工科研究与实践项目、一流网络安全学院建设示范项目高校、中国政府奖学金来华留学生接收院校、全国深化创新创业教育改革示范高校、国家大学生文化素质教育基地、大众创业万众创新示范基地、基础学科拔尖学生培养计划2.0基地，为欧亚-太平洋大学联盟、大学通识教育联盟、中国高校行星科学联盟、法学教育创新联盟、医学“双一流”建设联盟成员。',
+        swiperOption: {
+          slidesPerView: 'auto',
+          centeredSlides: true,
+          spaceBetween: 30,
+          mousewheel: true,
+          direction: 'vertical',
+          // pagination: {
+          //   el: '.introduction-swiper-pagination',
+          //   dynamicBullets: true
+          // },
+          scrollbar: {
+            el: '.introduction-swiper-scrollbar',
+            hide: true
+          },
+          // nextEl: '.introduction-swiper-button-next',
+          // prevEl: '.introduction-swiper-button-prev',
+          on: {
+            slideChange() {
+              if(this.activeIndex === 3){
+                _this.notifyCommentNotAuthorized();
+              }
+            },
+            // tap() {
+            //   console.log('onTap', this);
+            // }
+          }
+        }
+      }
+    },
+    methods: {
+      notifyCommentNotAuthorized: function () {
+        _this.$refs.comment.notifyNotAuthorized();
+      }
+    },
+    mounted() {
+      _this = this;
+    }
+  }
+  </script>
+  
+  <style scoped>
+  .box {
+    height: 100%;
+  }
+  .swiperWrap{
+    height: 100%;
+  }
+  </style>
+  </body>
+</html>
